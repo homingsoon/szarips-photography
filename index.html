@@ -1,0 +1,529 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Syarif Lazuardi Photographs</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Theatre, concert and portrait photographs by Syarif Lazuardi.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300;1,6..72,400&display=swap">
+<style>
+/* Layout: a photobook in plates. Each spread is composed by hand on a 12-column grid;
+   diptychs share a height, single plates sit off-centre in open paper. */
+:root{
+  --paper:#EEECE7;      /* uncoated stock, slightly grey */
+  --ink:#1D1C1A;        /* text and rules */
+  --ink-2:#5D5952;      /* captions, secondary text (6:1 on paper) */
+  --rule:rgba(29,28,26,.16);
+  --scrim:rgba(238,236,231,.94);
+  --serif:"Newsreader", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  --sans:"Geist", "Helvetica Neue", Arial, sans-serif;
+  --gut:clamp(12px, 1.8vw, 28px);
+  --side:clamp(16px, 4.2vw, 64px);
+  --spread:clamp(80px, 11vw, 176px);
+  --max:1440px;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 15px/1.6 var(--sans);
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+img{max-width:100%}
+[hidden]{display:none!important}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
+:focus-visible{outline:1px solid var(--ink);outline-offset:4px}
+.skip{position:absolute;left:-999px;top:8px}
+.skip:focus{left:16px;background:var(--paper);padding:6px 10px;z-index:200}
+
+.wrap{max-width:var(--max);margin-inline:auto;
+  padding-left:max(var(--side), env(safe-area-inset-left, 0px));
+  padding-right:max(var(--side), env(safe-area-inset-right, 0px))}
+
+/* ---------- header */
+.site-head{display:flex;justify-content:space-between;align-items:baseline;gap:16px 32px;flex-wrap:wrap;
+  padding-block:26px 0}
+.brand{font:400 21px/1 var(--serif);letter-spacing:-.005em}
+.site-nav{display:flex;gap:clamp(18px,2.4vw,34px);font-size:14px}
+.site-nav a{color:var(--ink-2);padding-block:4px;transition:color .2s}
+.site-nav a:hover,.site-nav a[aria-current="page"]{color:var(--ink)}
+.site-nav a[aria-current="page"]{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:6px}
+
+/* ---------- type */
+.display{font:300 clamp(40px,5.3vw,82px)/1.02 var(--serif);letter-spacing:-.022em;margin:0;text-wrap:balance}
+.h-sect{font:300 clamp(40px,6vw,96px)/1 var(--serif);letter-spacing:-.025em;margin:0}
+.lede{color:var(--ink-2);max-width:36ch;margin:0}
+.text-link{display:inline-block;border-bottom:1px solid var(--ink);padding-bottom:2px;font-size:14px;transition:opacity .2s}
+.text-link:hover{opacity:.6}
+
+/* ---------- plates */
+.plate{margin:0}
+.open{display:block;width:100%;cursor:zoom-in;line-height:0}
+.ph{display:block;width:100%;height:auto;background:var(--c,#222)}
+.js .ph{transition:opacity .7s ease}
+.js .ph:not(.ld){opacity:.001}
+figcaption{display:flex;gap:12px;align-items:baseline;margin-top:11px;font-size:12.5px;line-height:1.35;color:var(--ink-2)}
+figcaption .no,.no{font:italic 400 14px/1 var(--serif);font-variant-numeric:tabular-nums;color:var(--ink);min-width:1.4em}
+.plate:hover figcaption .t{color:var(--ink)}
+
+/* ---------- spreads */
+.spread{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gut);margin-top:var(--spread)}
+.cell{min-width:0;margin-top:var(--off,0);align-self:var(--al,start)}
+.pair{display:flex;gap:var(--gut);align-items:flex-start}
+.pi{min-width:0}
+
+/* ---------- home: the opening portrait */
+.intro{display:flex;flex-direction:column;align-items:center;text-align:center;padding-top:clamp(56px,8vw,120px)}
+.me-frame{width:clamp(180px,17vw,250px);aspect-ratio:1;border-radius:50%;overflow:hidden;background:var(--c,#1d4690)}
+.me{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 22%}
+.names{margin:clamp(28px,3vw,40px) 0 0;font:300 clamp(40px,5.6vw,88px)/1.05 var(--serif);letter-spacing:-.02em}
+.names-track{display:grid;justify-items:center}
+.nm{grid-area:1 / 1;white-space:nowrap;opacity:0;animation:alias 10.5s cubic-bezier(.4,0,.2,1) infinite}
+.nm:nth-child(2){animation-delay:3.5s}
+.nm:nth-child(3){animation-delay:7s}
+@keyframes alias{
+  0%{opacity:0;filter:blur(8px);letter-spacing:.02em}
+  7%{opacity:1;filter:blur(0);letter-spacing:-.02em}
+  28%{opacity:1;filter:blur(0);letter-spacing:-.02em}
+  35%{opacity:0;filter:blur(8px);letter-spacing:.02em}
+  100%{opacity:0}
+}
+.intro .lede{margin-top:22px;max-width:40ch}
+.intro-link{margin:26px 0 0}
+.aka{margin:0;color:var(--ink-2);font-size:16px}
+.selected-title{font:italic 300 clamp(22px,2vw,28px)/1.2 var(--serif);margin:var(--spread) 0 0;color:var(--ink-2)}
+.selected-title + .spread{margin-top:28px}
+.more{margin-top:clamp(64px,8vw,120px);display:flex;justify-content:flex-end}
+
+.sets{margin-top:var(--spread)}
+.sets h2{font:italic 300 clamp(22px,2vw,28px)/1.2 var(--serif);margin:0 0 20px;color:var(--ink-2)}
+.sets ol{list-style:none;margin:0;padding:0;border-top:1px solid var(--rule)}
+.sets li{border-bottom:1px solid var(--rule)}
+.sets a{display:grid;grid-template-columns:3.2em minmax(0,1fr) 3em auto;align-items:center;gap:20px;padding-block:22px}
+.sets .num{font:italic 400 15px var(--serif);color:var(--ink-2)}
+.sets .name{font:300 clamp(30px,3.6vw,54px)/1 var(--serif);letter-spacing:-.02em;transition:transform .45s cubic-bezier(.2,.7,.1,1)}
+.sets a:hover .name{transform:translateX(10px)}
+.sets .cnt{font-size:13px;color:var(--ink-2);font-variant-numeric:tabular-nums;text-align:right}
+.strip{display:flex;gap:6px;height:56px}
+.strip .th{height:100%;display:block}
+.strip .ph{height:100%;width:auto}
+
+/* ---------- gallery */
+.g-head{padding-top:clamp(48px,7vw,110px);display:grid;gap:22px}
+.g-head .lede{max-width:44ch}
+.controls{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:14px 32px;
+  margin-top:12px;padding-block:14px;border-block:1px solid var(--rule);font-size:14px}
+.controls [role=group]{display:flex;flex-wrap:wrap;gap:6px 24px}
+.controls button{color:var(--ink-2);padding-block:4px;transition:color .2s}
+.controls button:hover{color:var(--ink)}
+.controls button[aria-pressed="true"]{color:var(--ink);text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:6px}
+.controls sup{font-size:10px;margin-left:2px;font-variant-numeric:tabular-nums}
+.chapter + .chapter{margin-top:calc(var(--spread) * .6)}
+.chapter-head{display:grid;gap:12px;align-content:end}
+.chapter-head .num{font:italic 400 16px var(--serif);color:var(--ink-2);margin:0}
+.chapter-head h2{font:300 clamp(40px,4.4vw,68px)/1 var(--serif);letter-spacing:-.022em;margin:0}
+.chapter-head .desc{margin:6px 0 0;color:var(--ink-2);max-width:30ch}
+.chapter-head .meta{margin:0;font-size:13px;color:var(--ink-2)}
+.seq{transition:opacity .35s ease}
+.seq.fading,.index.fading{opacity:0}
+
+.index{list-style:none;margin:56px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:34px 22px;align-items:flex-end;
+  --h:clamp(96px,11vw,168px);transition:opacity .35s ease}
+.index li{width:calc(var(--h) * var(--r));display:grid;gap:8px}
+.index .no{font-size:13px}
+
+/* ---------- about & contact */
+.page{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));column-gap:var(--gut);padding-top:clamp(48px,7vw,110px)}
+.page-main{grid-column:1 / 8;display:grid;gap:30px;align-content:start}
+.page-side{grid-column:9 / 13}
+.statement{font:300 clamp(26px,2.7vw,40px)/1.22 var(--serif);letter-spacing:-.012em;margin:0;max-width:24ch;text-wrap:balance}
+.prose p{margin:0 0 1.1em;max-width:58ch;font-size:16px;line-height:1.7}
+.facts{margin:16px 0 0;border-top:1px solid var(--rule)}
+.facts .row{display:grid;grid-template-columns:minmax(0,13em) minmax(0,1fr);gap:4px 20px;padding-block:14px;border-bottom:1px solid var(--rule)}
+.facts dt{color:var(--ink-2);font-size:14px}
+.facts dd{margin:0}
+.facts a{border-bottom:1px solid var(--rule)}
+.facts a:hover{border-color:var(--ink)}
+.email{font:300 clamp(24px,2.8vw,40px)/1.15 var(--serif);letter-spacing:-.01em;word-break:break-word;user-select:all}
+.email-row{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 20px}
+.copy{font-size:13px;color:var(--ink-2);border-bottom:1px solid var(--rule);padding-bottom:1px}
+.copy:hover{color:var(--ink);border-color:var(--ink)}
+.lists{display:grid;gap:44px;align-content:start}
+.lists h2{font:italic 400 18px/1.3 var(--serif);margin:0 0 12px}
+.lists ul{margin:0;padding:0;list-style:none;color:var(--ink-2)}
+.lists li{padding-block:7px;border-bottom:1px solid var(--rule)}
+
+/* ---------- footer */
+.site-foot{margin-top:var(--spread);padding-block:26px calc(30px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--rule);
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px 24px;font-size:13px;color:var(--ink-2)}
+.site-foot a:hover{color:var(--ink)}
+
+/* ---------- viewer */
+.lb{position:fixed;inset:0;z-index:100;background:var(--paper);display:grid;grid-template-rows:minmax(0,1fr) auto;
+  padding-top:env(safe-area-inset-top,0px);opacity:0;transition:opacity .3s ease}
+.lb.on{opacity:1}
+.lb-stage{position:relative;display:flex;align-items:center;justify-content:center;min-height:0;
+  padding:clamp(16px,3.4vw,48px) max(var(--side), env(safe-area-inset-right,0px)) 12px max(var(--side), env(safe-area-inset-left,0px))}
+.lb-img{max-width:100%;max-height:100%;width:auto;height:auto;display:block;transition:opacity .3s ease, transform .5s cubic-bezier(.2,.7,.1,1)}
+.lb-img.swap{opacity:0;transform:scale(.985)}
+.lb-zone{position:absolute;top:0;bottom:0;width:34%;z-index:1}
+.lb-zone.prev{left:0;cursor:w-resize}
+.lb-zone.next{right:0;cursor:e-resize}
+.lb-bar{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:10px 28px;
+  padding:14px max(var(--side), env(safe-area-inset-right,0px)) calc(18px + env(safe-area-inset-bottom,0px)) max(var(--side), env(safe-area-inset-left,0px));font-size:13px}
+.lb-cap{margin:0;display:flex;flex-wrap:wrap;gap:4px 14px;align-items:baseline;min-width:0}
+.lb-cap .t{color:var(--ink)}
+.lb-cap .m{color:var(--ink-2)}
+.lb-nav{display:flex;gap:22px;align-items:baseline}
+.lb-nav button{color:var(--ink-2)}
+.lb-nav button:hover{color:var(--ink)}
+.lb-count{font-variant-numeric:tabular-nums;color:var(--ink-2)}
+body.lock{overflow:hidden}
+
+/* ---------- the one orchestrated moment: opening the book */
+@keyframes rise{from{clip-path:inset(100% 0 0 0)}to{clip-path:inset(0 0 0 0)}}
+@keyframes fadeup{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.me-frame{animation:fadeup 1.1s cubic-bezier(.2,.7,.1,1) .1s both}
+.intro .lede,.intro-link{animation:fadeup 1s cubic-bezier(.2,.7,.1,1) .6s both}
+
+/* ---------- tablet */
+@media (max-width:1100px){
+  .cell{--off:0!important}
+  .page-side{grid-column:8 / 13}
+}
+/* ---------- phone */
+@media (max-width:760px){
+  body{font-size:15px}
+  .site-head{padding-block:18px 0}
+  .brand{font-size:19px}
+  .site-nav{gap:18px}
+  .intro{padding-top:44px}
+  .me-frame{width:52vw;max-width:210px}
+  .names{font-size:clamp(34px,10vw,48px)}
+  .spread{display:flex;flex-direction:column;gap:52px;margin-top:84px}
+  .cell{margin-top:0;align-self:stretch}
+  .cell[data-m="l"]{width:84%;align-self:flex-start}
+  .cell[data-m="r"]{width:84%;align-self:flex-end}
+  .cell[data-m="s"]{width:70%;align-self:center}
+  .pair{flex-direction:column;gap:52px}
+  .pi{flex:none!important;width:100%}
+  .pair .pi:nth-child(2){width:84%;align-self:flex-end}
+  .chapter-head{order:-1}
+  .sets a{grid-template-columns:2.2em minmax(0,1fr) auto;padding-block:18px}
+  .strip{display:none}
+  .page{display:flex;flex-direction:column;gap:56px;padding-top:40px}
+  .page-side{width:84%;align-self:flex-end}
+  .facts .row{grid-template-columns:1fr}
+  .lb-zone{width:28%}
+  .lb-bar{flex-direction:column;align-items:stretch}
+  .lb-nav{justify-content:space-between}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  .names-track{display:flex;flex-wrap:wrap;justify-content:center;gap:0 .45em}
+  .nm{opacity:1;grid-area:auto}
+  .nm + .nm::before{content:"/";margin-right:.45em;color:var(--ink-2)}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="wrap">
+  <header class="site-head">
+    <a class="brand" href="#home" data-nav="home">Syarif Lazuardi</a>
+    <nav class="site-nav" aria-label="Main">
+      <a href="#home" data-nav="home">Home</a>
+      <a href="#gallery" data-nav="gallery">Gallery</a>
+      <a href="#about" data-nav="about">About</a>
+      <a href="#contact" data-nav="contact">Contact</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <!-- HOME -->
+    <section class="view" data-view="home" aria-label="Home">
+      <div class="intro">
+        <div class="me-frame"><img class="me" src="assets/img/me-480.webp" srcset="assets/img/me-480.webp 480w, assets/img/me-900.webp 900w" sizes="(max-width: 760px) 52vw, 250px" width="1024" height="1536" alt="Portrait of Syarif Lazuardi" fetchpriority="high" decoding="async" style="--c:#687492"></div>
+        <h1 class="names" aria-label="Syarif Lazuardi, also known as Szarips and Asaca Rei"><span class="names-track" aria-hidden="true"><span class="nm">Syarif Lazuardi</span><span class="nm">Szarips</span><span class="nm">Asaca Rei</span></span></h1>
+        <p class="lede">Photographs of performers, stages, and people in costume. Theatre, concert and portrait work, collected as a sequence of 22 plates.</p>
+        <p class="intro-link"><a class="text-link" href="#gallery">Open the gallery</a></p>
+      </div>
+
+      <h2 class="selected-title">Selected plates</h2>
+      <div class="spread"><div class="cell" data-m="full" style="grid-column:5 / 10;--al:start;--off:0"><figure class="plate" data-id="s01"><button class="open" type="button" aria-label="View plate 1, A single spot on the red floor"><img class="ph " src="assets/img/s01-1200.webp" srcset="assets/img/s01-640.webp 640w, assets/img/s01-1200.webp 1200w, assets/img/s01-1555.webp 1555w" sizes="(max-width: 760px) 92vw, min(41.7vw, 600px)" width="1555" height="1945" alt="A single spot on the red floor. Theatre, plate 1." loading="lazy" decoding="async" style="--c:#060203"></button><figcaption><span class="no">1</span><span class="t">A single spot on the red floor</span></figcaption></figure></div></div>
+<div class="spread"><div class="cell" data-m="l" style="grid-column:2 / 6;--al:start;--off:0"><figure class="plate" data-id="s15"><button class="open" type="button" aria-label="View plate 15, Blue light, hands joined"><img class="ph " src="assets/img/s15-1200.webp" srcset="assets/img/s15-640.webp 640w, assets/img/s15-1200.webp 1200w, assets/img/s15-1439.webp 1439w" sizes="(max-width: 760px) 92vw, min(33.3vw, 480px)" width="1439" height="1800" alt="Blue light, hands joined. Theatre, plate 15." loading="lazy" decoding="async" style="--c:#424271"></button><figcaption><span class="no">15</span><span class="t">Blue light, hands joined</span></figcaption></figure></div><div class="cell" data-m="r" style="grid-column:8 / 12;--al:start;--off:14vw"><figure class="plate" data-id="p02"><button class="open" type="button" aria-label="View plate 18, Red sleeve, gold pins"><img class="ph " src="assets/img/p02-1200.webp" srcset="assets/img/p02-640.webp 640w, assets/img/p02-1200.webp 1200w, assets/img/p02-1800.webp 1800w" sizes="(max-width: 760px) 92vw, min(33.3vw, 480px)" width="4000" height="6000" alt="Red sleeve, gold pins. Costume, plate 18." loading="lazy" decoding="async" style="--c:#6b1a18"></button><figcaption><span class="no">18</span><span class="t">Red sleeve, gold pins</span></figcaption></figure></div></div>
+<div class="spread"><div class="cell" data-m="full" style="grid-column:3 / 12;--al:start;--off:0"><figure class="plate" data-id="s04"><button class="open" type="button" aria-label="View plate 4, Floral dress, close"><img class="ph " src="assets/img/s04-1200.webp" srcset="assets/img/s04-640.webp 640w, assets/img/s04-1200.webp 1200w, assets/img/s04-1799.webp 1799w" sizes="(max-width: 760px) 92vw, min(75.0vw, 1080px)" width="1799" height="1438" alt="Floral dress, close. Theatre, plate 4." loading="lazy" decoding="async" style="--c:#271c15"></button><figcaption><span class="no">4</span><span class="t">Floral dress, close</span></figcaption></figure></div></div>
+<div class="spread"><div class="cell pair" style="grid-column:1 / 10;--al:start;--off:0"><div class="pi" style="flex:0.8000 1 0"><figure class="plate" data-id="s13"><button class="open" type="button" aria-label="View plate 13, Warm light, laughing"><img class="ph " src="assets/img/s13-1200.webp" srcset="assets/img/s13-640.webp 640w, assets/img/s13-1200.webp 1200w, assets/img/s13-1440.webp 1440w" sizes="(max-width: 760px) 92vw, min(37.5vw, 540px)" width="1440" height="1800" alt="Warm light, laughing. Theatre, plate 13." loading="lazy" decoding="async" style="--c:#705446"></button><figcaption><span class="no">13</span><span class="t">Warm light, laughing</span></figcaption></figure></div><div class="pi" style="flex:0.8007 1 0"><figure class="plate" data-id="s14"><button class="open" type="button" aria-label="View plate 14, Warm light, the kiss"><img class="ph " src="assets/img/s14-1153.webp" srcset="assets/img/s14-640.webp 640w, assets/img/s14-1153.webp 1153w" sizes="(max-width: 760px) 92vw, min(37.5vw, 540px)" width="1153" height="1440" alt="Warm light, the kiss. Theatre, plate 14." loading="lazy" decoding="async" style="--c:#806957"></button><figcaption><span class="no">14</span><span class="t">Warm light, the kiss</span></figcaption></figure></div></div></div>
+<div class="spread"><div class="cell" data-m="full" style="grid-column:1 / 8;--al:end;--off:0"><figure class="plate" data-id="s02"><button class="open" type="button" aria-label="View plate 2, Hat, coat, and the house lights"><img class="ph " src="assets/img/s02-1200.webp" srcset="assets/img/s02-640.webp 640w, assets/img/s02-1200.webp 1200w, assets/img/s02-1800.webp 1800w" sizes="(max-width: 760px) 92vw, min(58.3vw, 840px)" width="2016" height="1439" alt="Hat, coat, and the house lights. Theatre, plate 2." loading="lazy" decoding="async" style="--c:#170c02"></button><figcaption><span class="no">2</span><span class="t">Hat, coat, and the house lights</span></figcaption></figure></div><div class="cell" data-m="r" style="grid-column:9 / 12;--al:end;--off:0"><figure class="plate" data-id="s12"><button class="open" type="button" aria-label="View plate 12, The telephone"><img class="ph " src="assets/img/s12-1200.webp" srcset="assets/img/s12-640.webp 640w, assets/img/s12-1200.webp 1200w, assets/img/s12-1439.webp 1439w" sizes="(max-width: 760px) 92vw, min(25.0vw, 360px)" width="1439" height="1800" alt="The telephone. Theatre, plate 12." loading="lazy" decoding="async" style="--c:#0b0a0c"></button><figcaption><span class="no">12</span><span class="t">The telephone</span></figcaption></figure></div></div>
+<div class="spread"><div class="cell" data-m="full" style="grid-column:5 / 13;--al:start;--off:0"><figure class="plate" data-id="p05"><button class="open" type="button" aria-label="View plate 21, Bandaged nurse, arms raised"><img class="ph " src="assets/img/p05-1200.webp" srcset="assets/img/p05-640.webp 640w, assets/img/p05-1200.webp 1200w, assets/img/p05-1800.webp 1800w" sizes="(max-width: 760px) 92vw, min(66.7vw, 960px)" width="6000" height="4000" alt="Bandaged nurse, arms raised. Costume, plate 21." loading="lazy" decoding="async" style="--c:#625c5b"></button><figcaption><span class="no">21</span><span class="t">Bandaged nurse, arms raised</span></figcaption></figure></div></div>
+      <p class="more"><a class="text-link" href="#gallery">See all 22 photographs</a></p>
+
+      <section class="sets" aria-labelledby="sets-h">
+        <h2 id="sets-h">The three sets</h2>
+        <ol><li><a href="#gallery" data-filter="theatre"><span class="num">I</span><span class="name">Theatre</span><span class="cnt">15</span><span class="strip" aria-hidden="true"><span class="th"><img class="ph " src="assets/img/s01-1200.webp" srcset="assets/img/s01-640.webp 640w, assets/img/s01-1200.webp 1200w, assets/img/s01-1555.webp 1555w" sizes="(max-width: 760px) 92vw, min(8.0vw, 115px)" width="1555" height="1945" alt="A single spot on the red floor. Theatre, plate 1." loading="lazy" decoding="async" style="--c:#060203"></span><span class="th"><img class="ph " src="assets/img/s02-1200.webp" srcset="assets/img/s02-640.webp 640w, assets/img/s02-1200.webp 1200w, assets/img/s02-1800.webp 1800w" sizes="(max-width: 760px) 92vw, min(8.0vw, 115px)" width="2016" height="1439" alt="Hat, coat, and the house lights. Theatre, plate 2." loading="lazy" decoding="async" style="--c:#170c02"></span><span class="th"><img class="ph " src="assets/img/s03-1200.webp" srcset="assets/img/s03-640.webp 640w, assets/img/s03-1200.webp 1200w, assets/img/s03-1719.webp 1719w" sizes="(max-width: 760px) 92vw, min(8.0vw, 115px)" width="1719" height="1228" alt="The striped cane. Theatre, plate 3." loading="lazy" decoding="async" style="--c:#050404"></span><span class="th"><img class="ph " src="assets/img/s04-1200.webp" srcset="assets/img/s04-640.webp 640w, assets/img/s04-1200.webp 1200w, assets/img/s04-1799.webp 1799w" sizes="(max-width: 760px) 92vw, min(8.0vw, 115px)" width="1799" height="1438" alt="Floral dress, close. Theatre, plate 4." loading="lazy" decoding="async" style="--c:#271c15"></span><span class="th"><img class="ph " src="assets/img/s05-1200.webp" srcset="assets/img/s05-640.webp 640w, assets/img/s05-1200.webp 1200w, assets/img/s05-1800.webp 1800w" sizes="(max-width: 760px) 92vw, min(8.0vw, 115px)" width="2016" height="1439" alt="Floral dress, the whole stage. Theatre, plate 5." loading="lazy" decoding="async" style="--c:#0f0b0b"></span></span></a></li><li><a href="#gallery" data-filter="concert"><span class="num">II</span><span class="name">Concert</span><span class="cnt">1</span><span class="strip" aria-hidden="true"><span class="th"><img class="ph " src="assets/img/c01-1200.webp" srcset="assets/img/c01-640.webp 640w, assets/img/c01-1200.webp 1200w, assets/img/c01-1800.webp 1800w" sizes="(max-width: 760px) 92vw, min(8.0vw, 115px)" width="5184" height="2912" alt="Glove, microphone, sequins. Concert, plate 16." loading="lazy" decoding="async" style="--c:#101012"></span></span></a></li><li><a href="#gallery" data-filter="costume"><span class="num">III</span><span class="name">Costume</span><span class="cnt">6</span><span class="strip" aria-hidden="true"><span class="th"><img class="ph " src="assets/img/p01-1200.webp" srcset="assets/img/p01-640.webp 640w, assets/img/p01-1200.webp 1200w, assets/img/p01-1800.webp 1800w" sizes="(max-width: 760px) 92vw, min(8.0vw, 115px)" width="4000" height="6000" alt="Lace veil. Costume, plate 17." loading="lazy" decoding="async" style="--c:#383230"></span><span class="th"><img class="ph " src="assets/img/p02-1200.webp" srcset="assets/img/p02-640.webp 640w, assets/img/p02-1200.webp 1200w, assets/img/p02-1800.webp 1800w" sizes="(max-width: 760px) 92vw, min(8.0vw, 115px)" width="4000" height="6000" alt="Red sleeve, gold pins. Costume, plate 18." loading="lazy" decoding="async" style="--c:#6b1a18"></span><span class="th"><img class="ph " src="assets/img/p06-1200.webp" srcset="assets/img/p06-640.webp 640w, assets/img/p06-1200.webp 1200w, assets/img/p06-1800.webp 1800w" sizes="(max-width: 760px) 92vw, min(8.0vw, 115px)" width="6000" height="4000" alt="Painted tears, striped sleeves. Costume, plate 19." loading="lazy" decoding="async" style="--c:#181413"></span><span class="th"><img class="ph " src="assets/img/p04-1200.webp" srcset="assets/img/p04-640.webp 640w, assets/img/p04-1200.webp 1200w, assets/img/p04-1800.webp 1800w" sizes="(max-width: 760px) 92vw, min(8.0vw, 115px)" width="4000" height="6000" alt="Bandaged nurse, standing. Costume, plate 20." loading="lazy" decoding="async" style="--c:#6f6869"></span><span class="th"><img class="ph " src="assets/img/p05-1200.webp" srcset="assets/img/p05-640.webp 640w, assets/img/p05-1200.webp 1200w, assets/img/p05-1800.webp 1800w" sizes="(max-width: 760px) 92vw, min(8.0vw, 115px)" width="6000" height="4000" alt="Bandaged nurse, arms raised. Costume, plate 21." loading="lazy" decoding="async" style="--c:#625c5b"></span></span></a></li></ol>
+      </section>
+    </section>
+
+    <!-- GALLERY -->
+    <section class="view" data-view="gallery" aria-label="Gallery" hidden>
+      <div class="g-head">
+        <h1 class="h-sect">Gallery</h1>
+        <p class="lede">22 photographs in three sets. Read them in sequence, or switch to the index to see every plate at once.</p>
+        <div class="controls">
+          <div class="filters" role="group" aria-label="Show set"><button type="button" class="f is-on" data-f="all" aria-pressed="true">All <sup>22</sup></button><button type="button" class="f" data-f="theatre" aria-pressed="false">Theatre <sup>15</sup></button><button type="button" class="f" data-f="concert" aria-pressed="false">Concert <sup>1</sup></button><button type="button" class="f" data-f="costume" aria-pressed="false">Costume <sup>6</sup></button></div>
+          <div class="modes" role="group" aria-label="Layout">
+            <button type="button" data-mode="seq" aria-pressed="true">Sequence</button>
+            <button type="button" data-mode="index" aria-pressed="false">Index</button>
+          </div>
+        </div>
+      </div>
+      <div class="seq"><section class="chapter" data-chapter="theatre" aria-label="Theatre"><div class="spread"><div class="cell" data-m="full" style="grid-column:2 / 8;--al:start;--off:0"><figure class="plate" data-id="s01"><button class="open" type="button" aria-label="View plate 1, A single spot on the red floor"><img class="ph " src="assets/img/s01-1200.webp" srcset="assets/img/s01-640.webp 640w, assets/img/s01-1200.webp 1200w, assets/img/s01-1555.webp 1555w" sizes="(max-width: 760px) 92vw, min(50.0vw, 720px)" width="1555" height="1945" alt="A single spot on the red floor. Theatre, plate 1." loading="lazy" decoding="async" style="--c:#060203"></button><figcaption><span class="no">1</span><span class="t">A single spot on the red floor</span></figcaption></figure></div><header class="cell chapter-head" style="grid-column:9 / 13;--al:end"><p class="num">I</p><h2>Theatre</h2><p class="desc">Actors on stage, lit by a single spot or a warm wash. Low light, black around every figure, the gesture held for a second.</p><p class="meta">15 photographs, 2026</p></header></div>
+<div class="spread"><div class="cell pair" style="grid-column:1 / 13;--al:start;--off:0"><div class="pi" style="flex:1.4010 1 0"><figure class="plate" data-id="s02"><button class="open" type="button" aria-label="View plate 2, Hat, coat, and the house lights"><img class="ph " src="assets/img/s02-1200.webp" srcset="assets/img/s02-640.webp 640w, assets/img/s02-1200.webp 1200w, assets/img/s02-1800.webp 1800w" sizes="(max-width: 760px) 92vw, min(50.0vw, 720px)" width="2016" height="1439" alt="Hat, coat, and the house lights. Theatre, plate 2." loading="lazy" decoding="async" style="--c:#170c02"></button><figcaption><span class="no">2</span><span class="t">Hat, coat, and the house lights</span></figcaption></figure></div><div class="pi" style="flex:1.3998 1 0"><figure class="plate" data-id="s03"><button class="open" type="button" aria-label="View plate 3, The striped cane"><img class="ph " src="assets/img/s03-1200.webp" srcset="assets/img/s03-640.webp 640w, assets/img/s03-1200.webp 1200w, assets/img/s03-1719.webp 1719w" sizes="(max-width: 760px) 92vw, min(50.0vw, 720px)" width="1719" height="1228" alt="The striped cane. Theatre, plate 3." loading="lazy" decoding="async" style="--c:#050404"></button><figcaption><span class="no">3</span><span class="t">The striped cane</span></figcaption></figure></div></div></div>
+<div class="spread"><div class="cell" data-m="full" style="grid-column:1 / 8;--al:start;--off:0"><figure class="plate" data-id="s04"><button class="open" type="button" aria-label="View plate 4, Floral dress, close"><img class="ph " src="assets/img/s04-1200.webp" srcset="assets/img/s04-640.webp 640w, assets/img/s04-1200.webp 1200w, assets/img/s04-1799.webp 1799w" sizes="(max-width: 760px) 92vw, min(58.3vw, 840px)" width="1799" height="1438" alt="Floral dress, close. Theatre, plate 4." loading="lazy" decoding="async" style="--c:#271c15"></button><figcaption><span class="no">4</span><span class="t">Floral dress, close</span></figcaption></figure></div><div class="cell" data-m="r" style="grid-column:9 / 13;--al:end;--off:0"><figure class="plate" data-id="s05"><button class="open" type="button" aria-label="View plate 5, Floral dress, the whole stage"><img class="ph " src="assets/img/s05-1200.webp" srcset="assets/img/s05-640.webp 640w, assets/img/s05-1200.webp 1200w, assets/img/s05-1800.webp 1800w" sizes="(max-width: 760px) 92vw, min(33.3vw, 480px)" width="2016" height="1439" alt="Floral dress, the whole stage. Theatre, plate 5." loading="lazy" decoding="async" style="--c:#0f0b0b"></button><figcaption><span class="no">5</span><span class="t">Floral dress, the whole stage</span></figcaption></figure></div></div>
+<div class="spread"><div class="cell pair" style="grid-column:4 / 12;--al:start;--off:0"><div class="pi" style="flex:0.8000 1 0"><figure class="plate" data-id="s06"><button class="open" type="button" aria-label="View plate 6, Face to face"><img class="ph " src="assets/img/s06-1152.webp" srcset="assets/img/s06-640.webp 640w, assets/img/s06-1152.webp 1152w" sizes="(max-width: 760px) 92vw, min(33.4vw, 480px)" width="1152" height="1440" alt="Face to face. Theatre, plate 6." loading="lazy" decoding="async" style="--c:#322737"></button><figcaption><span class="no">6</span><span class="t">Face to face</span></figcaption></figure></div><div class="pi" style="flex:0.7992 1 0"><figure class="plate" data-id="s07"><button class="open" type="button" aria-label="View plate 7, Duet, half in shadow"><img class="ph " src="assets/img/s07-1200.webp" srcset="assets/img/s07-640.webp 640w, assets/img/s07-1200.webp 1200w, assets/img/s07-1329.webp 1329w" sizes="(max-width: 760px) 92vw, min(33.3vw, 480px)" width="1329" height="1663" alt="Duet, half in shadow. Theatre, plate 7." loading="lazy" decoding="async" style="--c:#0d0b0e"></button><figcaption><span class="no">7</span><span class="t">Duet, half in shadow</span></figcaption></figure></div></div></div>
+<div class="spread"><div class="cell" data-m="l" style="grid-column:8 / 12;--al:start;--off:0"><figure class="plate" data-id="s08"><button class="open" type="button" aria-label="View plate 8, White lace, red shawl"><img class="ph " src="assets/img/s08-1200.webp" srcset="assets/img/s08-640.webp 640w, assets/img/s08-1200.webp 1200w, assets/img/s08-1439.webp 1439w" sizes="(max-width: 760px) 92vw, min(33.3vw, 480px)" width="1439" height="1800" alt="White lace, red shawl. Theatre, plate 8." loading="lazy" decoding="async" style="--c:#20161d"></button><figcaption><span class="no">8</span><span class="t">White lace, red shawl</span></figcaption></figure></div></div>
+<div class="spread"><div class="cell" data-m="full" style="grid-column:1 / 9;--al:end;--off:0"><figure class="plate" data-id="s09"><button class="open" type="button" aria-label="View plate 9, Striped dress, waiting"><img class="ph " src="assets/img/s09-1200.webp" srcset="assets/img/s09-640.webp 640w, assets/img/s09-1200.webp 1200w, assets/img/s09-1619.webp 1619w" sizes="(max-width: 760px) 92vw, min(66.7vw, 960px)" width="1619" height="1294" alt="Striped dress, waiting. Theatre, plate 9." loading="lazy" decoding="async" style="--c:#121013"></button><figcaption><span class="no">9</span><span class="t">Striped dress, waiting</span></figcaption></figure></div><div class="cell" data-m="r" style="grid-column:10 / 13;--al:start;--off:0"><figure class="plate" data-id="s10"><button class="open" type="button" aria-label="View plate 10, Striped dress, reaching"><img class="ph " src="assets/img/s10-1160.webp" srcset="assets/img/s10-640.webp 640w, assets/img/s10-1160.webp 1160w" sizes="(max-width: 760px) 92vw, min(25.0vw, 360px)" width="1160" height="2063" alt="Striped dress, reaching. Theatre, plate 10." loading="lazy" decoding="async" style="--c:#161c24"></button><figcaption><span class="no">10</span><span class="t">Striped dress, reaching</span></figcaption></figure></div></div>
+<div class="spread"><div class="cell pair" style="grid-column:2 / 9;--al:start;--off:0"><div class="pi" style="flex:0.7994 1 0"><figure class="plate" data-id="s11"><button class="open" type="button" aria-label="View plate 11, One finger raised"><img class="ph " src="assets/img/s11-1200.webp" srcset="assets/img/s11-640.webp 640w, assets/img/s11-1200.webp 1200w, assets/img/s11-1439.webp 1439w" sizes="(max-width: 760px) 92vw, min(29.2vw, 420px)" width="1439" height="1800" alt="One finger raised. Theatre, plate 11." loading="lazy" decoding="async" style="--c:#131217"></button><figcaption><span class="no">11</span><span class="t">One finger raised</span></figcaption></figure></div><div class="pi" style="flex:0.7994 1 0"><figure class="plate" data-id="s12"><button class="open" type="button" aria-label="View plate 12, The telephone"><img class="ph " src="assets/img/s12-1200.webp" srcset="assets/img/s12-640.webp 640w, assets/img/s12-1200.webp 1200w, assets/img/s12-1439.webp 1439w" sizes="(max-width: 760px) 92vw, min(29.2vw, 420px)" width="1439" height="1800" alt="The telephone. Theatre, plate 12." loading="lazy" decoding="async" style="--c:#0b0a0c"></button><figcaption><span class="no">12</span><span class="t">The telephone</span></figcaption></figure></div></div></div>
+<div class="spread"><div class="cell pair" style="grid-column:1 / 13;--al:start;--off:0"><div class="pi" style="flex:0.8000 1 0"><figure class="plate" data-id="s13"><button class="open" type="button" aria-label="View plate 13, Warm light, laughing"><img class="ph " src="assets/img/s13-1200.webp" srcset="assets/img/s13-640.webp 640w, assets/img/s13-1200.webp 1200w, assets/img/s13-1440.webp 1440w" sizes="(max-width: 760px) 92vw, min(50.0vw, 720px)" width="1440" height="1800" alt="Warm light, laughing. Theatre, plate 13." loading="lazy" decoding="async" style="--c:#705446"></button><figcaption><span class="no">13</span><span class="t">Warm light, laughing</span></figcaption></figure></div><div class="pi" style="flex:0.8007 1 0"><figure class="plate" data-id="s14"><button class="open" type="button" aria-label="View plate 14, Warm light, the kiss"><img class="ph " src="assets/img/s14-1153.webp" srcset="assets/img/s14-640.webp 640w, assets/img/s14-1153.webp 1153w" sizes="(max-width: 760px) 92vw, min(50.0vw, 720px)" width="1153" height="1440" alt="Warm light, the kiss. Theatre, plate 14." loading="lazy" decoding="async" style="--c:#806957"></button><figcaption><span class="no">14</span><span class="t">Warm light, the kiss</span></figcaption></figure></div></div></div>
+<div class="spread"><div class="cell" data-m="s" style="grid-column:5 / 10;--al:start;--off:0"><figure class="plate" data-id="s15"><button class="open" type="button" aria-label="View plate 15, Blue light, hands joined"><img class="ph " src="assets/img/s15-1200.webp" srcset="assets/img/s15-640.webp 640w, assets/img/s15-1200.webp 1200w, assets/img/s15-1439.webp 1439w" sizes="(max-width: 760px) 92vw, min(41.7vw, 600px)" width="1439" height="1800" alt="Blue light, hands joined. Theatre, plate 15." loading="lazy" decoding="async" style="--c:#424271"></button><figcaption><span class="no">15</span><span class="t">Blue light, hands joined</span></figcaption></figure></div></div></section>
+<section class="chapter" data-chapter="concert" aria-label="Concert"><div class="spread"><header class="cell chapter-head" style="grid-column:1 / 4;--al:start"><p class="num">II</p><h2>Concert</h2><p class="desc">A singer at the microphone, the hall dark behind him.</p><p class="meta">1 photograph, August 2026</p></header><div class="cell" data-m="full" style="grid-column:4 / 13;--al:start;--off:0"><figure class="plate" data-id="c01"><button class="open" type="button" aria-label="View plate 16, Glove, microphone, sequins"><img class="ph " src="assets/img/c01-1200.webp" srcset="assets/img/c01-640.webp 640w, assets/img/c01-1200.webp 1200w, assets/img/c01-1800.webp 1800w" sizes="(max-width: 760px) 92vw, min(75.0vw, 1080px)" width="5184" height="2912" alt="Glove, microphone, sequins. Concert, plate 16." loading="lazy" decoding="async" style="--c:#101012"></button><figcaption><span class="no">16</span><span class="t">Glove, microphone, sequins</span></figcaption></figure></div></div></section>
+<section class="chapter" data-chapter="costume" aria-label="Costume"><div class="spread"><div class="cell pair" style="grid-column:1 / 9;--al:start;--off:0"><div class="pi" style="flex:0.6667 1 0"><figure class="plate" data-id="p01"><button class="open" type="button" aria-label="View plate 17, Lace veil"><img class="ph " src="assets/img/p01-1200.webp" srcset="assets/img/p01-640.webp 640w, assets/img/p01-1200.webp 1200w, assets/img/p01-1800.webp 1800w" sizes="(max-width: 760px) 92vw, min(33.3vw, 480px)" width="4000" height="6000" alt="Lace veil. Costume, plate 17." loading="lazy" decoding="async" style="--c:#383230"></button><figcaption><span class="no">17</span><span class="t">Lace veil</span></figcaption></figure></div><div class="pi" style="flex:0.6667 1 0"><figure class="plate" data-id="p02"><button class="open" type="button" aria-label="View plate 18, Red sleeve, gold pins"><img class="ph " src="assets/img/p02-1200.webp" srcset="assets/img/p02-640.webp 640w, assets/img/p02-1200.webp 1200w, assets/img/p02-1800.webp 1800w" sizes="(max-width: 760px) 92vw, min(33.3vw, 480px)" width="4000" height="6000" alt="Red sleeve, gold pins. Costume, plate 18." loading="lazy" decoding="async" style="--c:#6b1a18"></button><figcaption><span class="no">18</span><span class="t">Red sleeve, gold pins</span></figcaption></figure></div></div><header class="cell chapter-head" style="grid-column:10 / 13;--al:end"><p class="num">III</p><h2>Costume</h2><p class="desc">Portraits of people who came dressed as someone else: lace, gold pins, bandages and stage blood.</p><p class="meta">6 photographs</p></header></div>
+<div class="spread"><div class="cell" data-m="full" style="grid-column:3 / 11;--al:start;--off:0"><figure class="plate" data-id="p06"><button class="open" type="button" aria-label="View plate 19, Painted tears, striped sleeves"><img class="ph " src="assets/img/p06-1200.webp" srcset="assets/img/p06-640.webp 640w, assets/img/p06-1200.webp 1200w, assets/img/p06-1800.webp 1800w" sizes="(max-width: 760px) 92vw, min(66.7vw, 960px)" width="6000" height="4000" alt="Painted tears, striped sleeves. Costume, plate 19." loading="lazy" decoding="async" style="--c:#181413"></button><figcaption><span class="no">19</span><span class="t">Painted tears, striped sleeves</span></figcaption></figure></div></div>
+<div class="spread"><div class="cell" data-m="l" style="grid-column:1 / 5;--al:start;--off:0"><figure class="plate" data-id="p04"><button class="open" type="button" aria-label="View plate 20, Bandaged nurse, standing"><img class="ph " src="assets/img/p04-1200.webp" srcset="assets/img/p04-640.webp 640w, assets/img/p04-1200.webp 1200w, assets/img/p04-1800.webp 1800w" sizes="(max-width: 760px) 92vw, min(33.3vw, 480px)" width="4000" height="6000" alt="Bandaged nurse, standing. Costume, plate 20." loading="lazy" decoding="async" style="--c:#6f6869"></button><figcaption><span class="no">20</span><span class="t">Bandaged nurse, standing</span></figcaption></figure></div><div class="cell" data-m="full" style="grid-column:6 / 13;--al:end;--off:0"><figure class="plate" data-id="p05"><button class="open" type="button" aria-label="View plate 21, Bandaged nurse, arms raised"><img class="ph " src="assets/img/p05-1200.webp" srcset="assets/img/p05-640.webp 640w, assets/img/p05-1200.webp 1200w, assets/img/p05-1800.webp 1800w" sizes="(max-width: 760px) 92vw, min(58.3vw, 840px)" width="6000" height="4000" alt="Bandaged nurse, arms raised. Costume, plate 21." loading="lazy" decoding="async" style="--c:#625c5b"></button><figcaption><span class="no">21</span><span class="t">Bandaged nurse, arms raised</span></figcaption></figure></div></div>
+<div class="spread"><div class="cell" data-m="full" style="grid-column:2 / 9;--al:start;--off:0"><figure class="plate" data-id="p03"><button class="open" type="button" aria-label="View plate 22, Red hair, red hands"><img class="ph " src="assets/img/p03-1200.webp" srcset="assets/img/p03-640.webp 640w, assets/img/p03-1200.webp 1200w, assets/img/p03-1800.webp 1800w" sizes="(max-width: 760px) 92vw, min(58.3vw, 840px)" width="6000" height="4000" alt="Red hair, red hands. Costume, plate 22." loading="lazy" decoding="async" style="--c:#271613"></button><figcaption><span class="no">22</span><span class="t">Red hair, red hands</span></figcaption></figure></div></div></section></div>
+      <ol class="index" hidden><li data-chapter="theatre" style="--r:0.7995"><button class="open" type="button" data-id="s01" aria-label="View plate 1, A single spot on the red floor"><img class="ph " src="assets/img/s01-1200.webp" srcset="assets/img/s01-640.webp 640w, assets/img/s01-1200.webp 1200w, assets/img/s01-1555.webp 1555w" sizes="(max-width: 760px) 92vw, min(12.0vw, 173px)" width="1555" height="1945" alt="A single spot on the red floor. Theatre, plate 1." loading="lazy" decoding="async" style="--c:#060203"></button><span class="no">1</span></li><li data-chapter="theatre" style="--r:1.4010"><button class="open" type="button" data-id="s02" aria-label="View plate 2, Hat, coat, and the house lights"><img class="ph " src="assets/img/s02-1200.webp" srcset="assets/img/s02-640.webp 640w, assets/img/s02-1200.webp 1200w, assets/img/s02-1800.webp 1800w" sizes="(max-width: 760px) 92vw, min(12.0vw, 173px)" width="2016" height="1439" alt="Hat, coat, and the house lights. Theatre, plate 2." loading="lazy" decoding="async" style="--c:#170c02"></button><span class="no">2</span></li><li data-chapter="theatre" style="--r:1.3998"><button class="open" type="button" data-id="s03" aria-label="View plate 3, The striped cane"><img class="ph " src="assets/img/s03-1200.webp" srcset="assets/img/s03-640.webp 640w, assets/img/s03-1200.webp 1200w, assets/img/s03-1719.webp 1719w" sizes="(max-width: 760px) 92vw, min(12.0vw, 173px)" width="1719" height="1228" alt="The striped cane. Theatre, plate 3." loading="lazy" decoding="async" style="--c:#050404"></button><span class="no">3</span></li><li data-chapter="theatre" style="--r:1.2510"><button class="open" type="button" data-id="s04" aria-label="View plate 4, Floral dress, close"><img class="ph " src="assets/img/s04-1200.webp" srcset="assets/img/s04-640.webp 640w, assets/img/s04-1200.webp 1200w, assets/img/s04-1799.webp 1799w" sizes="(max-width: 760px) 92vw, min(12.0vw, 173px)" width="1799" height="1438" alt="Floral dress, close. Theatre, plate 4." loading="lazy" decoding="async" style="--c:#271c15"></button><span class="no">4</span></li><li data-chapter="theatre" style="--r:1.4010"><button class="open" type="button" data-id="s05" aria-label="View plate 5, Floral dress, the whole stage"><img class="ph " src="assets/img/s05-1200.webp" srcset="assets/img/s05-640.webp 640w, assets/img/s05-1200.webp 1200w, assets/img/s05-1800.webp 1800w" sizes="(max-width: 760px) 92vw, min(12.0vw, 173px)" width="2016" height="1439" alt="Floral dress, the whole stage. Theatre, plate 5." loading="lazy" decoding="async" style="--c:#0f0b0b"></button><span class="no">5</span></li><li data-chapter="theatre" style="--r:0.8000"><button class="open" type="button" data-id="s06" aria-label="View plate 6, Face to face"><img class="ph " src="assets/img/s06-1152.webp" srcset="assets/img/s06-640.webp 640w, assets/img/s06-1152.webp 1152w" sizes="(max-width: 760px) 92vw, min(12.0vw, 173px)" width="1152" height="1440" alt="Face to face. Theatre, plate 6." loading="lazy" decoding="async" style="--c:#322737"></button><span class="no">6</span></li><li data-chapter="theatre" style="--r:0.7992"><button class="open" type="button" data-id="s07" aria-label="View plate 7, Duet, half in shadow"><img class="ph " src="assets/img/s07-1200.webp" srcset="assets/img/s07-640.webp 640w, assets/img/s07-1200.webp 1200w, assets/img/s07-1329.webp 1329w" sizes="(max-width: 760px) 92vw, min(12.0vw, 173px)" width="1329" height="1663" alt="Duet, half in shadow. Theatre, plate 7." loading="lazy" decoding="async" style="--c:#0d0b0e"></button><span class="no">7</span></li><li data-chapter="theatre" style="--r:0.7994"><button class="open" type="button" data-id="s08" aria-label="View plate 8, White lace, red shawl"><img class="ph " src="assets/img/s08-1200.webp" srcset="assets/img/s08-640.webp 640w, assets/img/s08-1200.webp 1200w, assets/img/s08-1439.webp 1439w" sizes="(max-width: 760px) 92vw, min(12.0vw, 173px)" width="1439" height="1800" alt="White lace, red shawl. Theatre, plate 8." loading="lazy" decoding="async" style="--c:#20161d"></button><span class="no">8</span></li><li data-chapter="theatre" style="--r:1.2512"><button class="open" type="button" data-id="s09" aria-label="View plate 9, Striped dress, waiting"><img class="ph " src="assets/img/s09-1200.webp" srcset="assets/img/s09-640.webp 640w, assets/img/s09-1200.webp 1200w, assets/img/s09-1619.webp 1619w" sizes="(max-width: 760px) 92vw, min(12.0vw, 173px)" width="1619" height="1294" alt="Striped dress, waiting. Theatre, plate 9." loading="lazy" decoding="async" style="--c:#121013"></button><span class="no">9</span></li><li data-chapter="theatre" style="--r:0.5623"><button class="open" type="button" data-id="s10" aria-label="View plate 10, Striped dress, reaching"><img class="ph " src="assets/img/s10-1160.webp" srcset="assets/img/s10-640.webp 640w, assets/img/s10-1160.webp 1160w" sizes="(max-width: 760px) 92vw, min(12.0vw, 173px)" width="1160" height="2063" alt="Striped dress, reaching. Theatre, plate 10." loading="lazy" decoding="async" style="--c:#161c24"></button><span class="no">10</span></li><li data-chapter="theatre" style="--r:0.7994"><button class="open" type="button" data-id="s11" aria-label="View plate 11, One finger raised"><img class="ph " src="assets/img/s11-1200.webp" srcset="assets/img/s11-640.webp 640w, assets/img/s11-1200.webp 1200w, assets/img/s11-1439.webp 1439w" sizes="(max-width: 760px) 92vw, min(12.0vw, 173px)" width="1439" height="1800" alt="One finger raised. Theatre, plate 11." loading="lazy" decoding="async" style="--c:#131217"></button><span class="no">11</span></li><li data-chapter="theatre" style="--r:0.7994"><button class="open" type="button" data-id="s12" aria-label="View plate 12, The telephone"><img class="ph " src="assets/img/s12-1200.webp" srcset="assets/img/s12-640.webp 640w, assets/img/s12-1200.webp 1200w, assets/img/s12-1439.webp 1439w" sizes="(max-width: 760px) 92vw, min(12.0vw, 173px)" width="1439" height="1800" alt="The telephone. Theatre, plate 12." loading="lazy" decoding="async" style="--c:#0b0a0c"></button><span class="no">12</span></li><li data-chapter="theatre" style="--r:0.8000"><button class="open" type="button" data-id="s13" aria-label="View plate 13, Warm light, laughing"><img class="ph " src="assets/img/s13-1200.webp" srcset="assets/img/s13-640.webp 640w, assets/img/s13-1200.webp 1200w, assets/img/s13-1440.webp 1440w" sizes="(max-width: 760px) 92vw, min(12.0vw, 173px)" width="1440" height="1800" alt="Warm light, laughing. Theatre, plate 13." loading="lazy" decoding="async" style="--c:#705446"></button><span class="no">13</span></li><li data-chapter="theatre" style="--r:0.8007"><button class="open" type="button" data-id="s14" aria-label="View plate 14, Warm light, the kiss"><img class="ph " src="assets/img/s14-1153.webp" srcset="assets/img/s14-640.webp 640w, assets/img/s14-1153.webp 1153w" sizes="(max-width: 760px) 92vw, min(12.0vw, 173px)" width="1153" height="1440" alt="Warm light, the kiss. Theatre, plate 14." loading="lazy" decoding="async" style="--c:#806957"></button><span class="no">14</span></li><li data-chapter="theatre" style="--r:0.7994"><button class="open" type="button" data-id="s15" aria-label="View plate 15, Blue light, hands joined"><img class="ph " src="assets/img/s15-1200.webp" srcset="assets/img/s15-640.webp 640w, assets/img/s15-1200.webp 1200w, assets/img/s15-1439.webp 1439w" sizes="(max-width: 760px) 92vw, min(12.0vw, 173px)" width="1439" height="1800" alt="Blue light, hands joined. Theatre, plate 15." loading="lazy" decoding="async" style="--c:#424271"></button><span class="no">15</span></li><li data-chapter="concert" style="--r:1.7802"><button class="open" type="button" data-id="c01" aria-label="View plate 16, Glove, microphone, sequins"><img class="ph " src="assets/img/c01-1200.webp" srcset="assets/img/c01-640.webp 640w, assets/img/c01-1200.webp 1200w, assets/img/c01-1800.webp 1800w" sizes="(max-width: 760px) 92vw, min(12.0vw, 173px)" width="5184" height="2912" alt="Glove, microphone, sequins. Concert, plate 16." loading="lazy" decoding="async" style="--c:#101012"></button><span class="no">16</span></li><li data-chapter="costume" style="--r:0.6667"><button class="open" type="button" data-id="p01" aria-label="View plate 17, Lace veil"><img class="ph " src="assets/img/p01-1200.webp" srcset="assets/img/p01-640.webp 640w, assets/img/p01-1200.webp 1200w, assets/img/p01-1800.webp 1800w" sizes="(max-width: 760px) 92vw, min(12.0vw, 173px)" width="4000" height="6000" alt="Lace veil. Costume, plate 17." loading="lazy" decoding="async" style="--c:#383230"></button><span class="no">17</span></li><li data-chapter="costume" style="--r:0.6667"><button class="open" type="button" data-id="p02" aria-label="View plate 18, Red sleeve, gold pins"><img class="ph " src="assets/img/p02-1200.webp" srcset="assets/img/p02-640.webp 640w, assets/img/p02-1200.webp 1200w, assets/img/p02-1800.webp 1800w" sizes="(max-width: 760px) 92vw, min(12.0vw, 173px)" width="4000" height="6000" alt="Red sleeve, gold pins. Costume, plate 18." loading="lazy" decoding="async" style="--c:#6b1a18"></button><span class="no">18</span></li><li data-chapter="costume" style="--r:1.5000"><button class="open" type="button" data-id="p06" aria-label="View plate 19, Painted tears, striped sleeves"><img class="ph " src="assets/img/p06-1200.webp" srcset="assets/img/p06-640.webp 640w, assets/img/p06-1200.webp 1200w, assets/img/p06-1800.webp 1800w" sizes="(max-width: 760px) 92vw, min(12.0vw, 173px)" width="6000" height="4000" alt="Painted tears, striped sleeves. Costume, plate 19." loading="lazy" decoding="async" style="--c:#181413"></button><span class="no">19</span></li><li data-chapter="costume" style="--r:0.6667"><button class="open" type="button" data-id="p04" aria-label="View plate 20, Bandaged nurse, standing"><img class="ph " src="assets/img/p04-1200.webp" srcset="assets/img/p04-640.webp 640w, assets/img/p04-1200.webp 1200w, assets/img/p04-1800.webp 1800w" sizes="(max-width: 760px) 92vw, min(12.0vw, 173px)" width="4000" height="6000" alt="Bandaged nurse, standing. Costume, plate 20." loading="lazy" decoding="async" style="--c:#6f6869"></button><span class="no">20</span></li><li data-chapter="costume" style="--r:1.5000"><button class="open" type="button" data-id="p05" aria-label="View plate 21, Bandaged nurse, arms raised"><img class="ph " src="assets/img/p05-1200.webp" srcset="assets/img/p05-640.webp 640w, assets/img/p05-1200.webp 1200w, assets/img/p05-1800.webp 1800w" sizes="(max-width: 760px) 92vw, min(12.0vw, 173px)" width="6000" height="4000" alt="Bandaged nurse, arms raised. Costume, plate 21." loading="lazy" decoding="async" style="--c:#625c5b"></button><span class="no">21</span></li><li data-chapter="costume" style="--r:1.5000"><button class="open" type="button" data-id="p03" aria-label="View plate 22, Red hair, red hands"><img class="ph " src="assets/img/p03-1200.webp" srcset="assets/img/p03-640.webp 640w, assets/img/p03-1200.webp 1200w, assets/img/p03-1800.webp 1800w" sizes="(max-width: 760px) 92vw, min(12.0vw, 173px)" width="6000" height="4000" alt="Red hair, red hands. Costume, plate 22." loading="lazy" decoding="async" style="--c:#271613"></button><span class="no">22</span></li></ol>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="view" data-view="about" aria-label="About" hidden>
+      <div class="page">
+        <div class="page-main">
+          <h1 class="h-sect">About</h1>
+          <p class="statement">I photograph people while they perform: on a theatre stage, behind a microphone, or dressed as someone else for a night.</p>
+          <p class="aka">I'm Syarif Lazuardi. You may also know my work as Szarips and Asaca Rei.</p>
+          <div class="prose">
+            <p>Most of the pictures here were made in low light, with whatever the stage or the room provided. I keep the darkness around a figure, so a gesture, a face or a raised hand has room to stand on its own.</p>
+            <p>Alongside stage and event work I make portraits, candid and documentary pictures, and personal projects. This site is an archive of that work, arranged as a sequence rather than a feed.</p>
+          </div>
+          <dl class="facts">
+            <div class="row"><dt>Photographs</dt><dd>Stage, events, portraits, documentary and candid work, personal projects</dd></div>
+            <div class="row"><dt>Cameras in this collection</dt><dd>Canon EOS M50 Mark II, Canon EOS 700D, Fujifilm X-A3</dd></div>
+          </dl>
+        </div>
+        <div class="page-side"><figure class="plate" data-id="s08"><button class="open" type="button" aria-label="View plate 8, White lace, red shawl"><img class="ph " src="assets/img/s08-1200.webp" srcset="assets/img/s08-640.webp 640w, assets/img/s08-1200.webp 1200w, assets/img/s08-1439.webp 1439w" sizes="(max-width: 760px) 92vw, min(30.0vw, 432px)" width="1439" height="1800" alt="White lace, red shawl. Theatre, plate 8." loading="lazy" decoding="async" style="--c:#20161d"></button><figcaption><span class="no">8</span><span class="t">White lace, red shawl</span></figcaption></figure></div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="view" data-view="contact" aria-label="Contact" hidden>
+      <div class="page">
+        <div class="page-main">
+          <h1 class="h-sect">Contact</h1>
+          <p class="statement">For theatre, events, portraits and collaborations, write to me.</p>
+          <div class="email-row">
+            <a class="email" id="email" href="mailto:syariflazuardi02@gmail.com">syariflazuardi02@gmail.com</a>
+            <button class="copy" type="button" id="copy-email">Copy address</button>
+          </div>
+          <dl class="facts">
+            <div class="row"><dt>Instagram</dt><dd><a href="https://www.instagram.com/szarips/" rel="noopener" target="_blank">@szarips</a></dd></div><div class="row"><dt>LinkedIn</dt><dd><a href="https://www.linkedin.com/in/syarif-lazuardi" rel="noopener" target="_blank">syarif-lazuardi</a></dd></div>
+          </dl>
+        </div>
+        <div class="page-side lists">
+          <div>
+            <h2>Work I take on</h2>
+            <ul>
+              <li>Theatre and performance coverage</li>
+              <li>Concerts and live events</li>
+              <li>Portrait sessions, including costume and character portraits</li>
+              <li>Collaborations and personal projects</li>
+            </ul>
+          </div>
+          <div>
+            <h2>Useful to include in your message</h2>
+            <ul>
+              <li>The date, and the venue or city</li>
+              <li>What the event or session is</li>
+              <li>How the photographs will be used</li>
+              <li>When you need them delivered</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-foot">
+    <span>© 2026 Syarif Lazuardi. Photographs may not be reproduced without permission.</span>
+    <a href="#top" id="to-top">Back to top</a>
+  </footer>
+</div>
+
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Photograph viewer" hidden>
+  <div class="lb-stage">
+    <button class="lb-zone prev" type="button" aria-label="Previous photograph" tabindex="-1"></button>
+    <img class="lb-img" id="lb-img" alt="">
+    <button class="lb-zone next" type="button" aria-label="Next photograph" tabindex="-1"></button>
+  </div>
+  <div class="lb-bar">
+    <p class="lb-cap"><span class="no" id="lb-no"></span><span class="t" id="lb-t"></span><span class="m" id="lb-m"></span></p>
+    <div class="lb-nav">
+      <span class="lb-count" id="lb-count"></span>
+      <button type="button" id="lb-prev">Previous</button>
+      <button type="button" id="lb-next">Next</button>
+      <button type="button" id="lb-close">Close</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var PLATES = [{"id":"s01","n":1,"t":"A single spot on the red floor","ch":"Theatre","c":"theatre","src":"assets/img/s01-1555.webp","mid":"assets/img/s01-1200.webp","w":1555,"h":1945,"cam":"","exp":"","date":"2026"},{"id":"s02","n":2,"t":"Hat, coat, and the house lights","ch":"Theatre","c":"theatre","src":"assets/img/s02-1800.webp","mid":"assets/img/s02-1200.webp","w":2016,"h":1439,"cam":"","exp":"","date":"2026"},{"id":"s03","n":3,"t":"The striped cane","ch":"Theatre","c":"theatre","src":"assets/img/s03-1719.webp","mid":"assets/img/s03-1200.webp","w":1719,"h":1228,"cam":"","exp":"","date":"2026"},{"id":"s04","n":4,"t":"Floral dress, close","ch":"Theatre","c":"theatre","src":"assets/img/s04-1799.webp","mid":"assets/img/s04-1200.webp","w":1799,"h":1438,"cam":"","exp":"","date":"2026"},{"id":"s05","n":5,"t":"Floral dress, the whole stage","ch":"Theatre","c":"theatre","src":"assets/img/s05-1800.webp","mid":"assets/img/s05-1200.webp","w":2016,"h":1439,"cam":"","exp":"","date":"2026"},{"id":"s06","n":6,"t":"Face to face","ch":"Theatre","c":"theatre","src":"assets/img/s06-1152.webp","mid":"assets/img/s06-1152.webp","w":1152,"h":1440,"cam":"","exp":"","date":"2026"},{"id":"s07","n":7,"t":"Duet, half in shadow","ch":"Theatre","c":"theatre","src":"assets/img/s07-1329.webp","mid":"assets/img/s07-1200.webp","w":1329,"h":1663,"cam":"","exp":"","date":"2026"},{"id":"s08","n":8,"t":"White lace, red shawl","ch":"Theatre","c":"theatre","src":"assets/img/s08-1439.webp","mid":"assets/img/s08-1200.webp","w":1439,"h":1800,"cam":"","exp":"","date":"2026"},{"id":"s09","n":9,"t":"Striped dress, waiting","ch":"Theatre","c":"theatre","src":"assets/img/s09-1619.webp","mid":"assets/img/s09-1200.webp","w":1619,"h":1294,"cam":"","exp":"","date":"2026"},{"id":"s10","n":10,"t":"Striped dress, reaching","ch":"Theatre","c":"theatre","src":"assets/img/s10-1160.webp","mid":"assets/img/s10-1160.webp","w":1160,"h":2063,"cam":"","exp":"","date":"2026"},{"id":"s11","n":11,"t":"One finger raised","ch":"Theatre","c":"theatre","src":"assets/img/s11-1439.webp","mid":"assets/img/s11-1200.webp","w":1439,"h":1800,"cam":"","exp":"","date":"2026"},{"id":"s12","n":12,"t":"The telephone","ch":"Theatre","c":"theatre","src":"assets/img/s12-1439.webp","mid":"assets/img/s12-1200.webp","w":1439,"h":1800,"cam":"","exp":"","date":"2026"},{"id":"s13","n":13,"t":"Warm light, laughing","ch":"Theatre","c":"theatre","src":"assets/img/s13-1440.webp","mid":"assets/img/s13-1200.webp","w":1440,"h":1800,"cam":"","exp":"","date":"2026"},{"id":"s14","n":14,"t":"Warm light, the kiss","ch":"Theatre","c":"theatre","src":"assets/img/s14-1153.webp","mid":"assets/img/s14-1153.webp","w":1153,"h":1440,"cam":"","exp":"","date":"2026"},{"id":"s15","n":15,"t":"Blue light, hands joined","ch":"Theatre","c":"theatre","src":"assets/img/s15-1439.webp","mid":"assets/img/s15-1200.webp","w":1439,"h":1800,"cam":"","exp":"","date":"2026"},{"id":"c01","n":16,"t":"Glove, microphone, sequins","ch":"Concert","c":"concert","src":"assets/img/c01-1800.webp","mid":"assets/img/c01-1200.webp","w":5184,"h":2912,"cam":"Canon EOS 700D","exp":"18 mm\u2002f/5.6\u20021/200 s\u2002ISO 3200","date":"9 August 2026"},{"id":"p01","n":17,"t":"Lace veil","ch":"Costume","c":"costume","src":"assets/img/p01-1800.webp","mid":"assets/img/p01-1200.webp","w":4000,"h":6000,"cam":"Canon EOS M50 Mark II","exp":"28 mm\u2002f/4.5\u20021/60 s\u2002ISO 800","date":"30 October 2026"},{"id":"p02","n":18,"t":"Red sleeve, gold pins","ch":"Costume","c":"costume","src":"assets/img/p02-1800.webp","mid":"assets/img/p02-1200.webp","w":4000,"h":6000,"cam":"Canon EOS M50 Mark II","exp":"37 mm\u2002f/5.6\u20021/60 s\u2002ISO 800","date":"30 October 2026"},{"id":"p06","n":19,"t":"Painted tears, striped sleeves","ch":"Costume","c":"costume","src":"assets/img/p06-1800.webp","mid":"assets/img/p06-1200.webp","w":6000,"h":4000,"cam":"Fujifilm X-A3","exp":"25.6 mm\u2002f/10\u20021/50 s\u2002ISO 1000","date":""},{"id":"p04","n":20,"t":"Bandaged nurse, standing","ch":"Costume","c":"costume","src":"assets/img/p04-1800.webp","mid":"assets/img/p04-1200.webp","w":4000,"h":6000,"cam":"Canon EOS M50 Mark II","exp":"37 mm\u2002f/5.6\u20021/60 s\u2002ISO 800","date":"30 October 2026"},{"id":"p05","n":21,"t":"Bandaged nurse, arms raised","ch":"Costume","c":"costume","src":"assets/img/p05-1800.webp","mid":"assets/img/p05-1200.webp","w":6000,"h":4000,"cam":"Canon EOS M50 Mark II","exp":"27 mm\u2002f/4.5\u20021/60 s\u2002ISO 800","date":"30 October 2026"},{"id":"p03","n":22,"t":"Red hair, red hands","ch":"Costume","c":"costume","src":"assets/img/p03-1800.webp","mid":"assets/img/p03-1200.webp","w":6000,"h":4000,"cam":"Canon EOS M50 Mark II","exp":"28 mm\u2002f/4.5\u20021/60 s\u2002ISO 800","date":"30 October 2026"}];
+  var byId = {}; PLATES.forEach(function(p, i){ p.i = i; byId[p.id] = p; });
+  var root = document.documentElement; root.classList.add("js");
+
+  /* images fade in once decoded; the coloured ground holds the space until then */
+  function mark(img){ img.classList.add("ld"); }
+  document.querySelectorAll(".ph").forEach(function(img){
+    if (img.complete && img.naturalWidth) mark(img);
+    else { img.addEventListener("load", function(){ mark(img); }); img.addEventListener("error", function(){ mark(img); }); }
+  });
+
+  /* ---------- views (hash routing) */
+  var views = {}; document.querySelectorAll(".view").forEach(function(v){ views[v.dataset.view] = v; });
+  var navLinks = document.querySelectorAll("[data-nav]");
+  var current = null;
+  function route(){
+    var name = (location.hash || "#home").slice(1);
+    if (!views[name]) name = "home";
+    if (name === current) return;
+    var swap = function(){
+      Object.keys(views).forEach(function(k){ views[k].hidden = (k !== name); });
+      navLinks.forEach(function(a){ if (a.dataset.nav === name && a.classList.length === 0) a.setAttribute("aria-current","page"); else a.removeAttribute("aria-current"); });
+      window.scrollTo(0, 0);
+      var title = { home: "", gallery: "Gallery", about: "About", contact: "Contact" }[name];
+      document.title = (title ? title + ", " : "") + "Syarif Lazuardi Photographs";
+    };
+    var first = current === null; current = name;
+    if (!first && document.startViewTransition && !matchMedia("(prefers-reduced-motion: reduce)").matches) document.startViewTransition(swap);
+    else swap();
+  }
+  window.addEventListener("hashchange", route);
+  route();
+
+  /* ---------- gallery: filter and mode */
+  var seq = document.querySelector(".seq"), idx = document.querySelector(".index");
+  var filter = "all", mode = "seq";
+  function setPressed(sel, attr, val){
+    document.querySelectorAll(sel).forEach(function(b){ var on = b.dataset[attr] === val; b.setAttribute("aria-pressed", on); });
+  }
+  function apply(){
+    seq.querySelectorAll(".chapter").forEach(function(c){ c.hidden = !(filter === "all" || c.dataset.chapter === filter); });
+    idx.querySelectorAll("li").forEach(function(li){ li.hidden = !(filter === "all" || li.dataset.chapter === filter); });
+    seq.hidden = mode !== "seq"; idx.hidden = mode !== "index";
+    setPressed(".filters button", "f", filter); setPressed(".modes button", "mode", mode);
+  }
+  function soft(fn){
+    var el = mode === "seq" ? seq : idx;
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches){ fn(); apply(); return; }
+    el.classList.add("fading");
+    setTimeout(function(){ fn(); apply(); seq.classList.add("fading"); idx.classList.add("fading");
+      requestAnimationFrame(function(){ requestAnimationFrame(function(){ seq.classList.remove("fading"); idx.classList.remove("fading"); }); });
+    }, 260);
+  }
+  document.querySelectorAll(".filters button").forEach(function(b){
+    b.addEventListener("click", function(){ var v = b.dataset.f; if (v !== filter) soft(function(){ filter = v; }); });
+  });
+  document.querySelectorAll(".modes button").forEach(function(b){
+    b.addEventListener("click", function(){ var v = b.dataset.mode; if (v !== mode) soft(function(){ mode = v; }); });
+  });
+  document.querySelectorAll("[data-filter]").forEach(function(a){
+    a.addEventListener("click", function(){ filter = a.dataset.filter; mode = "seq"; apply(); });
+  });
+  apply();
+
+  /* ---------- viewer */
+  var lb = document.getElementById("lb"), lbImg = document.getElementById("lb-img");
+  var list = PLATES, pos = 0, opener = null, timer = null;
+  function contextList(fromEl){
+    if (fromEl && fromEl.closest('[data-view="gallery"]') && filter !== "all")
+      return PLATES.filter(function(p){ return p.c === filter; });
+    return PLATES;
+  }
+  function meta(p){
+    var bits = [p.ch]; if (p.date) bits.push(p.date); if (p.cam) bits.push(p.cam); if (p.exp) bits.push(p.exp);
+    return bits.join(",  ");
+  }
+  function show(i, dir){
+    pos = (i + list.length) % list.length; var p = list[pos];
+    lbImg.classList.add("swap");
+    clearTimeout(timer);
+    timer = setTimeout(function(){
+      lbImg.onload = function(){ lbImg.classList.remove("swap"); };
+      lbImg.src = p.mid; lbImg.width = p.w; lbImg.height = p.h;
+      lbImg.alt = p.t + ", plate " + p.n;
+      var full = new Image(); full.onload = function(){ if (list[pos] === p) lbImg.src = p.src; }; full.src = p.src;
+      [1, -1].forEach(function(d){ var q = list[(pos + d + list.length) % list.length]; var im = new Image(); im.src = q.mid; });
+    }, lb.classList.contains("on") ? 160 : 0);
+    document.getElementById("lb-no").textContent = p.n;
+    document.getElementById("lb-t").textContent = p.t;
+    document.getElementById("lb-m").textContent = meta(p);
+    document.getElementById("lb-count").textContent = (pos + 1) + " of " + list.length;
+  }
+  function open(id, from){
+    opener = from; list = contextList(from);
+    var i = 0; list.forEach(function(p, k){ if (p.id === id) i = k; });
+    lb.hidden = false; document.body.classList.add("lock");
+    show(i);
+    requestAnimationFrame(function(){ lb.classList.add("on"); });
+    document.getElementById("lb-close").focus({ preventScroll: true });
+  }
+  function close(){
+    lb.classList.remove("on"); document.body.classList.remove("lock");
+    setTimeout(function(){ lb.hidden = true; lbImg.removeAttribute("src"); }, 300);
+    if (opener) opener.focus({ preventScroll: true });
+  }
+  document.addEventListener("click", function(e){
+    var b = e.target.closest(".open"); if (!b) return;
+    var id = b.dataset.id || (b.closest("[data-id]") || {}).dataset.id;
+    if (id) { e.preventDefault(); open(id, b); }
+  });
+  document.getElementById("lb-close").addEventListener("click", close);
+  document.getElementById("lb-prev").addEventListener("click", function(){ show(pos - 1); });
+  document.getElementById("lb-next").addEventListener("click", function(){ show(pos + 1); });
+  lb.querySelector(".lb-zone.prev").addEventListener("click", function(){ show(pos - 1); });
+  lb.querySelector(".lb-zone.next").addEventListener("click", function(){ show(pos + 1); });
+  document.addEventListener("keydown", function(e){
+    if (lb.hidden) return;
+    if (e.key === "Escape") close();
+    else if (e.key === "ArrowRight") show(pos + 1);
+    else if (e.key === "ArrowLeft") show(pos - 1);
+    else if (e.key === "Tab"){ /* keep focus inside the viewer */
+      var f = lb.querySelectorAll(".lb-nav button"); var first = f[0], last = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+    }
+  });
+  var sx = null, sy = 0;
+  lb.addEventListener("touchstart", function(e){ sx = e.touches[0].clientX; sy = e.touches[0].clientY; }, { passive: true });
+  lb.addEventListener("touchend", function(e){
+    if (sx === null) return; var dx = e.changedTouches[0].clientX - sx, dy = e.changedTouches[0].clientY - sy; sx = null;
+    if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) show(pos + (dx < 0 ? 1 : -1));
+    else if (dy > 90 && Math.abs(dy) > Math.abs(dx)) close();
+  });
+
+  /* ---------- small things */
+  document.getElementById("to-top").addEventListener("click", function(e){ e.preventDefault(); window.scrollTo({ top: 0, behavior: "smooth" }); });
+  var copyBtn = document.getElementById("copy-email");
+  copyBtn.addEventListener("click", function(){
+    var text = document.getElementById("email").textContent.trim();
+    var done = function(){ copyBtn.textContent = "Copied"; setTimeout(function(){ copyBtn.textContent = "Copy address"; }, 1800); };
+    var fallback = function(){ var r = document.createRange(); r.selectNodeContents(document.getElementById("email")); var s = getSelection(); s.removeAllRanges(); s.addRange(r); };
+    try { navigator.clipboard.writeText(text).then(done, fallback); } catch (err) { fallback(); }
+  });
+})();
+</script>
+</body>
+</html>
